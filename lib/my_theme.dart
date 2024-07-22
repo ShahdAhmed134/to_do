@@ -5,5 +5,8 @@ class MyThemeData {
   static ThemeData lightMode = ThemeData(
       scaffoldBackgroundColor: AppColors.backgroundLightColor,
       appBarTheme:
-          AppBarTheme(elevation: 0, backgroundColor: AppColors.primaryColor));
+          AppBarTheme(elevation: 0, backgroundColor: AppColors.primaryColor),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.primaryColor,
+          unselectedItemColor: AppColors.grayColor));
 }
