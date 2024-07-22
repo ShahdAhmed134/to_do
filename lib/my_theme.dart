@@ -8,5 +8,12 @@ class MyThemeData {
           AppBarTheme(elevation: 0, backgroundColor: AppColors.primaryColor),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: AppColors.primaryColor,
-          unselectedItemColor: AppColors.grayColor));
+          unselectedItemColor: AppColors.grayColor,
+          backgroundColor: Colors.transparent,
+          elevation: 0),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primaryColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35),
+              side: BorderSide(color: AppColors.whiteColor, width: 4))));
 }
