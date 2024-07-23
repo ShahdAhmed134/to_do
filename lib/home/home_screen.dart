@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/add_list/add_list_tab.dart';
 import 'package:to_do_app/add_list/add_task.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/setting/setting_tab.dart';
+
+import '../provider/app_config_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName ='home';
@@ -16,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -27,26 +31,30 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           notchMargin: 8,
-          child: BottomNavigationBar(
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                selectedIndex = index;
-                setState(() {});
-              },
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.list,
-                      size: 30,
-                    ),
-                    label: ''),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.settings,
-                      size: 30,
-                    ),
-                    label: ''),
-              ]),
+          child: Theme(
+            data: Theme.of(context)
+                .copyWith(canvasColor: Theme.of(context).primaryColor),
+            child: BottomNavigationBar(
+                currentIndex: selectedIndex,
+                onTap: (index) {
+                  selectedIndex = index;
+                  setState(() {});
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.list,
+                        size: 30,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.settings,
+                        size: 30,
+                      ),
+                      label: ''),
+                ]),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

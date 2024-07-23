@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
+
+import '../provider/app_config_provider.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   @override
@@ -12,12 +16,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Container(
       margin: EdgeInsets.all(20),
       child: Column(
         children: [
           Text(
-            'add new Task',
+            AppLocalizations.of(context)!.new_task,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
@@ -40,8 +45,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       /// valid
                     },
                     decoration: InputDecoration(
-                  hintText: 'enter task title',
-                  hintStyle: Theme.of(context)
+                      hintText: AppLocalizations.of(context)!.task_title,
+                      hintStyle: Theme.of(context)
                       .textTheme
                       .titleMedium!
                       .copyWith(color: AppColors.grayColor),
@@ -58,8 +63,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       return null;
                     },
                     decoration: InputDecoration(
-                  hintText: 'enter task details',
-                  hintStyle: Theme.of(context)
+                      hintText: AppLocalizations.of(context)!.task_desc,
+                      hintStyle: Theme.of(context)
                       .textTheme
                       .titleMedium!
                       .copyWith(color: AppColors.grayColor),
@@ -69,7 +74,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     height: 20,
                   ),
                   Text(
-                    'Select Date',
+                    AppLocalizations.of(context)!.date,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
@@ -90,7 +95,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                         addTask();
                       },
                       child: Text(
-                        'Add',
+                        AppLocalizations.of(context)!.add,
                         style: Theme.of(context).textTheme.titleLarge,
                       ))
                 ],
