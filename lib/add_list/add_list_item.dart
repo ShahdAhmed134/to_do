@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
+
+import '../provider/app_config_provider.dart';
 
 class AddListItem extends StatelessWidget {
   const AddListItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: AppColors.whiteColor),
+          borderRadius: BorderRadius.circular(12),
+          color: provider.isDark()
+              ? AppColors.blackDarkColor
+              : AppColors.whiteColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,12 +31,12 @@ class AddListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('Title',
+                Text(AppLocalizations.of(context)!.title,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(color: AppColors.primaryColor)),
-                Text('Desc',
+                Text(AppLocalizations.of(context)!.desc,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
