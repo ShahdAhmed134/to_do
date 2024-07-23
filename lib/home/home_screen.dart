@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/add_list/add_list_tab.dart';
+import 'package:to_do_app/add_list/add_task.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/setting/settinr_tab.dart';
 
@@ -17,7 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("To Do List"),
+          title: Text(
+            "To Do List",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           //  toolbarHeight: MediaQuery.of(context).size.height * 0.1,
         ),
         bottomNavigationBar: BottomAppBar(
@@ -45,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showBottomSheet();
+          },
           child: Icon(
             Icons.add,
             size: 30,
@@ -60,5 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(child: selectedIndex == 0 ? AddListgTab() : SettingTab())
         ]));
+  }
+
+  void showBottomSheet() {
+    showModalBottomSheet(
+        context: context, builder: (context) => AddTaskBottomSheet());
   }
 }

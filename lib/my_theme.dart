@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/app_colors.dart';
 
 class MyThemeData {
@@ -15,5 +16,20 @@ class MyThemeData {
           backgroundColor: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(35),
-              side: BorderSide(color: AppColors.whiteColor, width: 4))));
+              side: BorderSide(color: AppColors.whiteColor, width: 4))),
+      bottomSheetTheme: BottomSheetThemeData(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20)))),
+      textTheme: TextTheme(
+        titleLarge: GoogleFonts.poppins(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: AppColors.whiteColor),
+        titleMedium: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: AppColors.blackColor),
+      ));
 }
