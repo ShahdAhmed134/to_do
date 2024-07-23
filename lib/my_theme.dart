@@ -31,5 +31,13 @@ class MyThemeData {
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: AppColors.blackColor),
+        bodyLarge: GoogleFonts.inter(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: AppColors.blackColor),
+        bodyMedium: GoogleFonts.inter(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: AppColors.blackColor),
       ));
 }
