@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/add_list/add_list_tab.dart';
 import 'package:to_do_app/add_list/add_task.dart';
 import 'package:to_do_app/app_colors.dart';
-import 'package:to_do_app/setting/settinr_tab.dart';
+import 'package:to_do_app/setting/setting_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName ='home';
