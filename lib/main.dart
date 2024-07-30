@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/home/home_screen.dart';
 import 'package:to_do_app/my_theme.dart';
 import 'package:to_do_app/provider/app_config_provider.dart';
+import 'package:to_do_app/provider/provider_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +20,16 @@ void main() async {
               projectId: 'todo-app-66341'))
       : await Firebase.initializeApp();
   await FirebaseFirestore.instance.disableNetwork();
-  runApp(ChangeNotifierProvider(
-      create: (context) => AppConfigProvider(), child: MyApp()));
+
+  runApp(MultiProvider(
+    child: MyApp(),
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => AppConfigProvider(),
+      ),
+      ChangeNotifierProvider(create: (context) => ProviderList())
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget{
