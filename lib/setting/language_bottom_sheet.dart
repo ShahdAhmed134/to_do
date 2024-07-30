@@ -11,14 +11,15 @@ class LanguageBottomSheet extends StatefulWidget {
 }
 
 class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
+  late AppConfigProvider provider;
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppConfigProvider>(context);
+    provider = Provider.of<AppConfigProvider>(context);
     return Container(
 
         // margin: EdgeInsets.all(15),
 
-        color: Color(0xffffffff),
+        color: provider.isDark() ? AppColors.blackDarkColor : Color(0xffffffff),
         height: 250,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +76,11 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   Widget unGetSelectedLanguge(String text) {
     return Row(
       children: [
-        Text(text, style: Theme.of(context).textTheme.titleMedium),
+        Text(text,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: provider.isDark()
+                    ? AppColors.whiteColor
+                    : AppColors.blackColor)),
       ],
     );
   }

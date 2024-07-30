@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/setting/language_bottom_sheet.dart';
 import 'package:to_do_app/setting/theme_bottom_sheet.dart';
+
+import '../provider/app_config_provider.dart';
 
 class SettingTab extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class SettingTab extends StatefulWidget {
 class _SettingTabState extends State<SettingTab> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Column(
@@ -40,7 +44,9 @@ class _SettingTabState extends State<SettingTab> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppLocalizations.of(context)!.english),
+                  Text(provider.AppLanguage == 'en'
+                      ? AppLocalizations.of(context)!.english
+                      : AppLocalizations.of(context)!.arabic),
                   Icon(
                     Icons.arrow_drop_down,
                     size: 30,
@@ -70,7 +76,9 @@ class _SettingTabState extends State<SettingTab> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppLocalizations.of(context)!.light),
+                  Text(provider.appTheme == ThemeMode.light
+                      ? AppLocalizations.of(context)!.light
+                      : AppLocalizations.of(context)!.dark),
                   Icon(
                     Icons.arrow_drop_down,
                     size: 30,

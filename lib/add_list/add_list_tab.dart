@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/add_list/add_list_item.dart';
 import 'package:to_do_app/app_colors.dart';
-import 'package:to_do_app/firebase.dart';
 import 'package:to_do_app/provider/provider_list.dart';
 
 import '../provider/app_config_provider.dart';
-import '../task.dart';
 
 class AddListgTab extends StatefulWidget {
   @override
@@ -28,17 +25,28 @@ class _AddListgTabState extends State<AddListgTab> {
         children: [
           EasyDateTimeLine(
             locale: provider.AppLanguage,
-            initialDate: DateTime.now(),
+            initialDate: providerList.selectDate,
             onDateChange: (selectedDate) {
-              //`selectedDate` the new date selected.
+              providerList.changeSelectDate(selectedDate);
             },
-            headerProps: const EasyHeaderProps(
+            headerProps: EasyHeaderProps(
+              monthStyle: TextStyle(
+                color: provider.isDark() ? AppColors.whiteColor : Colors.black,
+              ),
               monthPickerType: MonthPickerType.switcher,
+              selectedDateStyle: TextStyle(
+                color: provider.isDark() ? AppColors.whiteColor : Colors.black,
+              ),
               dateFormatter: DateFormatter.fullDateDMY(),
             ),
-            dayProps: const EasyDayProps(
-              disabledDayStyle: DayStyle(
-                dayStrStyle: TextStyle(color: AppColors.whiteColor),
+            dayProps: EasyDayProps(
+              inactiveDayStyle: DayStyle(
+                dayNumStyle: TextStyle(
+                    color:
+                        provider.isDark() ? AppColors.whiteColor : Colors.black,
+                    fontWeight:
+                        FontWeight.bold // Change the text color if needed
+                    ),
               ),
               dayStructure: DayStructure.dayStrDayNumMonth,
               activeDayStyle: DayStyle(

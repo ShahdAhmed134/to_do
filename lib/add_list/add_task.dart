@@ -19,9 +19,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   String title = '';
   String desc = '';
   late ProviderList providerList;
+  late AppConfigProvider provider;
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppConfigProvider>(context);
+    provider = Provider.of<AppConfigProvider>(context);
     providerList = Provider.of<ProviderList>(context);
     return Container(
       margin: EdgeInsets.all(20),
@@ -29,7 +30,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         children: [
           Text(
             AppLocalizations.of(context)!.new_task,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: provider.isDark()
+                    ? AppColors.whiteColor
+                    : AppColors.blackDarkColor),
           ),
           SizedBox(
             height: 25,
@@ -97,7 +101,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     child: Text(
                         '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: provider.isDark()
+                                ? AppColors.whiteColor
+                                : AppColors.blackDarkColor)),
                   ),
                   SizedBox(
                     height: 30,
