@@ -11,9 +11,10 @@ class ThemeBottomSheet extends StatefulWidget {
 }
 
 class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
+  late AppConfigProvider provider;
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppConfigProvider>(context);
+    provider = Provider.of<AppConfigProvider>(context);
     return Container(
         color: provider.isDark() ? Color(0xff151b30) : Color(0xffffffff),
         height: 250,
@@ -70,7 +71,11 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
   Widget unGetSelectedLanguge(String text) {
     return Row(
       children: [
-        Text(text, style: Theme.of(context).textTheme.titleMedium),
+        Text(text,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: provider.isDark()
+                    ? AppColors.whiteColor
+                    : AppColors.blackColor)),
       ],
     );
   }
