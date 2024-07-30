@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/firebase.dart';
+import 'package:to_do_app/provider/provider_list.dart';
 import 'package:to_do_app/task.dart';
 
 import '../provider/app_config_provider.dart';
@@ -17,10 +18,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   var selectedDate = DateTime.now();
   String title = '';
   String desc = '';
-
+  late ProviderList providerList;
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
+    providerList = Provider.of<ProviderList>(context);
     return Container(
       margin: EdgeInsets.all(20),
       child: Column(
@@ -121,6 +123,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       Firebase.addTaskFirestore(task).timeout(Duration(seconds: 1),
           onTimeout: () {
         print('task added successfully ');
+        providerList.getAllTasksFromFireStore();
         Navigator.pop(context);
       });
     }

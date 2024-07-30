@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
+import 'package:to_do_app/task.dart';
 
 import '../provider/app_config_provider.dart';
 
 class AddListItem extends StatelessWidget {
-  const AddListItem({super.key});
+  Task task;
+
+  AddListItem({required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +34,12 @@ class AddListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(AppLocalizations.of(context)!.title,
+                Text(task.title,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(color: AppColors.primaryColor)),
-                Text(AppLocalizations.of(context)!.desc,
+                Text(task.description,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
