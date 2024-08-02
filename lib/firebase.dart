@@ -23,6 +23,18 @@ class Firebase {
     return taskDocument.set(task);
   }
 
+  ////////////////////////////////////////
+  static Future<void> updateTaskFirestore(Task task) {
+    var taskCollection = getTaskCollection();
+
+    /// collection
+    var taskDocument = taskCollection.doc();
+
+    ///document
+    task.id = taskDocument.id;
+    return taskDocument.set(task);
+  }
+
   static Future<void> deleteTaskFromFireStore(Task task) {
     return getTaskCollection().doc(task.id).delete();
   }

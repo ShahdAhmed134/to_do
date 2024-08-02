@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget{
     initialRoute:HomeScreen.routName ,
     routes: {
       HomeScreen.routName:(context)=>HomeScreen(),
-    },
+        // EditTask.routeName:(context)=>EditTask(task: task,)
+      },
       theme: MyThemeData.lightMode,
       darkTheme: MyThemeData.darkMode,
       themeMode: provider.appTheme,

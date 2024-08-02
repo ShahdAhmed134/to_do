@@ -149,3 +149,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     setState(() {});
   }
 }
+
+class ArgsEdit {
+  String title;
+  String description;
+
+  ArgsEdit({required this.title, required this.description});
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/Edit/edit_task.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/firebase.dart';
 import 'package:to_do_app/task.dart';
@@ -8,15 +9,24 @@ import 'package:to_do_app/task.dart';
 import '../provider/app_config_provider.dart';
 import '../provider/provider_list.dart';
 
-class AddListItem extends StatelessWidget {
+class AddListItem extends StatefulWidget {
   Task task;
 
   AddListItem({required this.task});
 
   @override
+  State<AddListItem> createState() => _AddListItemState();
+}
+
+class _AddListItemState extends State<AddListItem> {
+  bool isTaskDone = false;
+  late ProviderList providerList;
+  late AppConfigProvider provider;
+
+  @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppConfigProvider>(context);
-    var providerList = Provider.of<ProviderList>(context);
+    provider = Provider.of<AppConfigProvider>(context);
+    providerList = Provider.of<ProviderList>(context);
     return Container(
       margin: EdgeInsets.all(10),
       child: Slidable(
@@ -31,7 +41,7 @@ class AddListItem extends StatelessWidget {
             SlidableAction(
               borderRadius: BorderRadius.circular(10),
               onPressed: (context) {
-                Firebase.deleteTaskFromFireStore(task)
+                Firebase.deleteTaskFromFireStore(widget.task)
                     .timeout(Duration(seconds: 1), onTimeout: () {
                   print('task deleted');
                 });
@@ -44,53 +54,84 @@ class AddListItem extends StatelessWidget {
             ),
           ],
         ),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: provider.isDark()
-                  ? AppColors.blackDarkColor
-                  : AppColors.whiteColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 22, 15, 22),
-                width: 4,
-                height: 80,
-                color: AppColors.primaryColor,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditTask(task: widget.task),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(task.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                                color: AppColors.primaryColor, fontSize: 22)),
-                    Text(task.description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w700)),
-                  ],
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: provider.isDark()
+                    ? AppColors.blackDarkColor
+                    : AppColors.whiteColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 25, 20, 25),
+                  width: 4,
+                  height: 70,
+                  color: isTaskDone
+                      ? AppColors.greenColor
+                      : AppColors.primaryColor,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 14),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.primaryColor,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(widget.task.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  color: isTaskDone
+                                      ? AppColors.greenColor
+                                      : AppColors.primaryColor,
+                                  fontSize: 22)),
+                      Text(widget.task.description,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w700)),
+                    ],
+                  ),
                 ),
-                child: Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 33,
-                ),
-              )
-            ],
+                isTaskDone
+                    ? Container(
+                        margin: EdgeInsets.all(10),
+                        child: Text('Done!',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(color: AppColors.greenColor)),
+                      )
+                    : Container(
+                        margin: EdgeInsets.all(10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 14),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.primaryColor,
+                        ),
+                        child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                isTaskDone = true;
+                              });
+                            },
+                            child: Icon(
+                              Icons.check,
+                              size: 33,
+                              color: Colors.white,
+                            )),
+                      )
+              ],
+            ),
           ),
         ),
       ),
