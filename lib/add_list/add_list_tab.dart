@@ -30,17 +30,39 @@ class _AddListgTabState extends State<AddListgTab> {
               providerList.changeSelectDate(selectedDate);
             },
             headerProps: EasyHeaderProps(
+              // padding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+              //showMonthPicker: false,
               monthStyle: TextStyle(
-                color: provider.isDark() ? AppColors.whiteColor : Colors.black,
+                color: AppColors.blackDarkColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
-              monthPickerType: MonthPickerType.switcher,
               selectedDateStyle: TextStyle(
-                color: provider.isDark() ? AppColors.whiteColor : Colors.black,
+                color: AppColors.blackDarkColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
-              dateFormatter: DateFormatter.fullDateDMY(),
+              dateFormatter: DateFormatter.fullDateDayAsStrMY(),
             ),
             dayProps: EasyDayProps(
-              inactiveDayStyle: DayStyle(
+              borderColor: AppColors.blackDarkColor,
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width * 0.17,
+              todayStyle: DayStyle(
+                decoration: BoxDecoration(
+                  color: provider.isDark()
+                      ? AppColors.blackDarkColor
+                      : Colors.white,
+                  border: Border.all(color: AppColors.primaryColor, width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                dayStrStyle: TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      provider.isDark() ? AppColors.whiteColor : Colors.black,
+                  // Change the text color if needed
+                ),
                 dayNumStyle: TextStyle(
                     color:
                         provider.isDark() ? AppColors.whiteColor : Colors.black,
@@ -48,24 +70,61 @@ class _AddListgTabState extends State<AddListgTab> {
                         FontWeight.bold // Change the text color if needed
                     ),
               ),
-              dayStructure: DayStructure.dayStrDayNumMonth,
+              todayHighlightStyle: TodayHighlightStyle.withBorder,
+              todayHighlightColor: AppColors.primaryColor,
+              //   todayHighlightStyle: TodayHighlightStyle.withBackground,
+
+              inactiveDayStyle: DayStyle(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: provider.isDark()
+                      ? AppColors.blackDarkColor
+                      : Colors.white,
+                ),
+                dayStrStyle: TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      provider.isDark() ? AppColors.whiteColor : Colors.black,
+                  // Change the text color if needed
+                ),
+                dayNumStyle: TextStyle(
+                    color:
+                        provider.isDark() ? AppColors.whiteColor : Colors.black,
+                    fontWeight:
+                        FontWeight.bold // Change the text color if needed
+                    ),
+              ),
+              dayStructure: DayStructure.dayStrDayNum,
               activeDayStyle: DayStyle(
+                dayNumStyle: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor),
+                dayStrStyle: TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xff3371FF),
-                      Color(0xff8426D6),
-                    ],
+                    colors: provider.isDark()
+                        ? [AppColors.blackDarkColor, AppColors.blackDarkColor]
+                        : [Color(0xffffffff), Color(0xffffffff)],
                   ),
                 ),
               ),
             ),
+            timeLineProps: const EasyTimeLineProps(
+              hPadding: 16.0, // padding from left and right
+              separatorPadding: 16.0,
+              // margin: EdgeInsets.all(10)// padding between days
+            ),
           ),
           Expanded(
-              child: ListView.builder(
+            child: ListView.builder(
               itemBuilder: (context, index) => AddListItem(
                 task: providerList.tasksList[index],
               ),

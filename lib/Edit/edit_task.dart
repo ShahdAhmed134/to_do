@@ -185,7 +185,9 @@ class _EditTaskState extends State<EditTask> {
   @override
   void initState() {
     super.initState();
-    titleController = TextEditingController(text: widget.task.title);
+    titleController = TextEditingController(
+      text: widget.task.title,
+    );
     descriptionController =
         TextEditingController(text: widget.task.description);
     selectedDate = widget.task.dateTime;
@@ -216,7 +218,9 @@ class _EditTaskState extends State<EditTask> {
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: AppColors.whiteColor,
+            color: provider.isDark()
+                ? AppColors.blackDarkColor
+                : AppColors.whiteColor,
           ),
           width: MediaQuery.of(context).size.width * 0.9,
           height: MediaQuery.of(context).size.height * 0.7,
@@ -250,7 +254,7 @@ class _EditTaskState extends State<EditTask> {
                           hintStyle: Theme.of(context)
                               .textTheme
                               .titleMedium!
-                              .copyWith(color: AppColors.grayColor),
+                              .copyWith(color: Color(0xffb2aeae)),
                         ),
                       ),
                       SizedBox(
