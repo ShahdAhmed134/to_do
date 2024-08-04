@@ -22,7 +22,7 @@ class _SettingTabState extends State<SettingTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: MediaQuery.of(context).size.height * 0.16,
           ),
           Text(
             AppLocalizations.of(context)!.language,

@@ -70,13 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: Column(children: [
+        body: Stack(children: [
           Container(
             width: double.infinity,
-            height: 60,
+            height: 90,
             color: AppColors.primaryColor,
           ),
-          Expanded(child: selectedIndex == 0 ? AddListgTab() : SettingTab())
+          selectedIndex == 0 ? AddListgTab() : SettingTab()
         ]));
   }
 
