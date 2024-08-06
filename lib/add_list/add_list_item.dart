@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/Edit/edit_task.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/firebase.dart';
-import 'package:to_do_app/task.dart';
+import 'package:to_do_app/model/task.dart';
 
 import '../provider/app_config_provider.dart';
 import '../provider/provider_list.dart';

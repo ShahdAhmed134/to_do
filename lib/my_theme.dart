@@ -40,6 +40,10 @@ class MyThemeData {
             fontSize: 18,
             fontWeight: FontWeight.w400,
             color: AppColors.blackColor),
+        labelLarge: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
       ));
   static ThemeData darkMode = ThemeData(
       primaryColor: AppColors.primaryColor,
