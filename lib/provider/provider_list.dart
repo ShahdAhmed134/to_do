@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/firebase.dart';
-import 'package:to_do_app/task.dart';
-import 'package:to_do_app/firebase.dart';
+import 'package:to_do_app/model/task.dart';
 
 class ProviderList extends ChangeNotifier {
   List<Task> tasksList = [];

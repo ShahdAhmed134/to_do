@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:to_do_app/task.dart';
+import 'package:to_do_app/model/task.dart';
 
 class Firebase {
   static CollectionReference<Task> getTaskCollection() {

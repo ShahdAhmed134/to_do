@@ -5,6 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/auth/login/login.dart';
+import 'package:to_do_app/auth/register/register_screen.dart';
 import 'package:to_do_app/home/home_screen.dart';
 import 'package:to_do_app/my_theme.dart';
 import 'package:to_do_app/provider/app_config_provider.dart';
@@ -39,10 +41,12 @@ class MyApp extends StatelessWidget{
     var provider = Provider.of<AppConfigProvider>(context);
     return MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute:HomeScreen.routName ,
-    routes: {
+      initialRoute: LoginScreen.routName,
+      routes: {
       HomeScreen.routName:(context)=>HomeScreen(),
         // EditTask.routeName:(context)=>EditTask(task: task,)
+        RegisterScreen.routName: (context) => RegisterScreen(),
+        LoginScreen.routName: (context) => LoginScreen()
       },
       theme: MyThemeData.lightMode,
       darkTheme: MyThemeData.darkMode,

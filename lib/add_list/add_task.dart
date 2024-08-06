@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/app_colors.dart';
 import 'package:to_do_app/firebase.dart';
+import 'package:to_do_app/model/task.dart';
 import 'package:to_do_app/provider/provider_list.dart';
-import 'package:to_do_app/task.dart';
 
 import '../provider/app_config_provider.dart';
 
